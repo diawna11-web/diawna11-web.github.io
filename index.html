@@ -276,9 +276,9 @@ footer{text-align:center;padding:40px 24px;background:var(--navy-deep);color:#a9
 
   <section class="qr-section" id="connect">
     <h2>Scan to Connect</h2>
-    <p>Point a camera here for more &mdash; if the code won't scan or the page doesn't come up, tap below and you'll land on the official Xavier Women's Basketball roster instead.</p>
+    <p>Point a camera here to open the official Xavier Women's Basketball roster &mdash; or tap below if the code won't scan.</p>
     <div id="qr" class="qr-box"></div>
-    <div><a href="#" id="qr-fallback-link" class="qr-fallback">Tap here</a></div>
+    <div><a href="https://goxavier.com/sports/womens-basketball/roster" id="qr-fallback-link" class="qr-fallback" target="_blank" rel="noopener">Tap here</a></div>
     <p class="fan-made-note">Unofficial fan page. Jersey icons and court graphic are original artwork &mdash; not official Xavier Athletics or team branding.</p>
   </section>
 
@@ -288,8 +288,7 @@ footer{text-align:center;padding:40px 24px;background:var(--navy-deep);color:#a9
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
   (function(){
-    var targetUrl = "https://claude.ai/code/artifact/f44f3955-54db-4358-8891-4de883f3eb11";
-    var fallbackUrl = "https://goxavier.com/sports/womens-basketball/roster";
+    var targetUrl = "https://goxavier.com/sports/womens-basketball/roster";
 
     new QRCode(document.getElementById('qr'), {
       text: targetUrl,
@@ -298,19 +297,6 @@ footer{text-align:center;padding:40px 24px;background:var(--navy-deep);color:#a9
       colorDark: "#0c2340",
       colorLight: "#ffffff",
       correctLevel: QRCode.CorrectLevel.M
-    });
-
-    // Cross-origin navigation failures aren't reported to JS, so this uses a
-    // timeout heuristic: if the primary page hasn't taken over the tab by
-    // the deadline, assume it didn't pop up and send the visitor to the
-    // official roster page instead.
-    document.getElementById('qr-fallback-link').addEventListener('click', function(e){
-      e.preventDefault();
-      var timer = setTimeout(function(){
-        window.location.href = fallbackUrl;
-      }, 1500);
-      window.addEventListener('pagehide', function(){ clearTimeout(timer); });
-      window.location.href = targetUrl;
     });
   })();
 </script>
